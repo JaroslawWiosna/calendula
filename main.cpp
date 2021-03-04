@@ -144,23 +144,56 @@ void usage(FILE *stream)
     println(stream, " ./calendula [options]");
     println(stream);
     println(stream, "Options:");
+    println(stream, " -s, --sunday     Sunday as first day of week");
+    println(stream, " -m, --monday     Monday as first day of week");
+    println(stream, "     --tuesday    Tuesday as first day of week");
+    println(stream, "     --wednesday  Wednesday as first day of week");
+    println(stream, "     --thursday   Thursday as first day of week");
+    println(stream, "     --friday     Friday as first day of week");
+    println(stream, "     --saturday   Saturday as first day of week");
     println(stream, " -V, --version    display version information and exit");
     println(stream, " -h, --help       display this help text and exit");
 }
 
 int main(int argc, char *argv[]) {
+    Weekday first_day_of_the_week{Weekday::Mo};
     for (int i{1}; i < argc; ++i) {
         if (0 == strcmp("-h", argv[i]) || 0 == strcmp("--help", argv[i])) {
             usage(stderr);
             exit(1);
         }
-    }
-    for (int i{1}; i < argc; ++i) {
         if (0 == strcmp("-V", argv[i]) || 0 == strcmp("--version", argv[i])) {
             println(stdout, "calendula ", version);
             exit(1);
         }
+        if (0 == strcmp("-s", argv[i]) || 0 == strcmp("--sunday", argv[i])) {
+            first_day_of_the_week = Weekday::Su;
+        }
+        if (0 == strcmp("-m", argv[i]) || 0 == strcmp("--monday", argv[i])) {
+            first_day_of_the_week = Weekday::Mo;
+        }
+        if (0 == strcmp("--tuesday", argv[i])) {
+            first_day_of_the_week = Weekday::Tu;
+            panic("TODO: Set starting weekday from argv (other than Sunday or Monday");
+        }
+        if (0 == strcmp("--wednesday", argv[i])) {
+            first_day_of_the_week = Weekday::We;
+            panic();
+        }
+        if (0 == strcmp("--thursday", argv[i])) {
+            first_day_of_the_week = Weekday::Th;
+            panic();
+        }
+        if (0 == strcmp("--friday", argv[i])) {
+            first_day_of_the_week = Weekday::Fr;
+            panic();
+        }
+        if (0 == strcmp("--saturday", argv[i])) {
+            first_day_of_the_week = Weekday::Sa;
+            panic();
+        }
     }
+
     struct tm t{};
     current_local_time(&t);
 
@@ -169,7 +202,6 @@ int main(int argc, char *argv[]) {
 
     ////////
 
-    const Weekday first_day_of_the_week{Weekday::Mo};
     
     print(stdout, Pad{4, ' '});
     print_current_month_and_year();
