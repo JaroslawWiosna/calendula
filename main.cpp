@@ -174,7 +174,7 @@ int main(int argc, char *argv[]) {
         }
         if (0 == strcmp("--tuesday", argv[i])) {
             first_day_of_the_week = Weekday::Tu;
-            panic("TODO: Set starting weekday from argv (other than Sunday or Monday");
+            panic("TODO(#2): Set starting weekday from argv (other than Sunday or Monday");
         }
         if (0 == strcmp("--wednesday", argv[i])) {
             first_day_of_the_week = Weekday::We;
