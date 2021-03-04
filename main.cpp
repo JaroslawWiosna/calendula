@@ -147,6 +147,7 @@ int main() {
 
     const Weekday first_day_of_the_week{Weekday::Mo};
     
+    print(stdout, Pad{4, ' '});
     print_current_month_and_year();
     println(stdout);
     int i = (int)first_day_of_the_week;
