@@ -1,3 +1,5 @@
+#include "version.txt"
+
 #include "aids.hpp"
 
 #include <cstdio>
@@ -142,6 +144,7 @@ void usage(FILE *stream)
     println(stream, " ./calendula [options]");
     println(stream);
     println(stream, "Options:");
+    println(stream, " -V, --version    display version information and exit");
     println(stream, " -h, --help       display this help text and exit");
 }
 
@@ -149,6 +152,12 @@ int main(int argc, char *argv[]) {
     for (int i{1}; i < argc; ++i) {
         if (0 == strcmp("-h", argv[i]) || 0 == strcmp("--help", argv[i])) {
             usage(stderr);
+            exit(1);
+        }
+    }
+    for (int i{1}; i < argc; ++i) {
+        if (0 == strcmp("-V", argv[i]) || 0 == strcmp("--version", argv[i])) {
+            println(stdout, "calendula ", version);
             exit(1);
         }
     }

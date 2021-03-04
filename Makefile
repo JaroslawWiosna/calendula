@@ -10,6 +10,11 @@ all: $(APP)
 run: clean $(APP)
 	./$(APP)
 
-$(APP): $(wildcard *.cpp) $(wildcard *.hpp) 
+# Taken from https://stackoverflow.com/a/51730966
+version.txt:
+	printf '"%s"' `git describe --tags --always --dirty` | grep -qsf - version.txt \
+	|| printf >version.txt 'const char version[]="%s";\n' `git describe --tags --always --dirty`
+
+$(APP): $(wildcard *.cpp) $(wildcard *.hpp) version.txt
 	$(CXX) $(CXXFLAGS) main.cpp -o $(APP) $(LIBS)
 
