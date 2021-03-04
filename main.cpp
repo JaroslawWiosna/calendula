@@ -137,31 +137,15 @@ Weekday first_weekday_of_current_month() {
 }
 
 int main() {
-    printf("%s\n", current_local_time_cstr());
     struct tm t{};
     current_local_time(&t);
 
-    print(stdout, "Current month and year `");
-    print_current_month_and_year();
-    println(stdout, "`");
-
     Weekday first = first_weekday_of_current_month();
-    println(stdout, "first_weekday_of_current_month: `", to_sv(first), '`');
-
     const int cal_width = 7 * 2 + 6;
 
     ////////
 
     const Weekday first_day_of_the_week{Weekday::Mo};
-    println(stdout, "first_day_of_the_week", to_sv(first_day_of_the_week), (int)first_day_of_the_week);
-    println(stdout, to_sv(Weekday::Mo), (int)Weekday::Mo);
-    println(stdout, to_sv(Weekday::Tu), (int)Weekday::Tu);
-    println(stdout, to_sv(Weekday::We), (int)Weekday::We);
-    println(stdout, to_sv(Weekday::Th), (int)Weekday::Th);
-    println(stdout, to_sv(Weekday::Fr), (int)Weekday::Fr);
-    println(stdout, to_sv(Weekday::Sa), (int)Weekday::Sa);
-    println(stdout, to_sv(Weekday::Su), (int)Weekday::Su);
-
     
     print_current_month_and_year();
     println(stdout);
