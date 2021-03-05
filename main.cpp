@@ -21,6 +21,16 @@ void current_local_time(struct tm *t) {
     t = localtime(&rawtime);
 }
 
+void tm_from_iso8601(struct tm *t, String_View sv) {
+    memset(t, 0, sizeof(struct tm)); 
+    char buf0[255];
+    memcpy(buf0, sv.data, sv.count);
+    strptime(buf0, "%Y-%m-%d", t);
+    // https://stackoverflow.com/a/9575245
+    time_t when = mktime(t);
+    t = localtime(&when);
+}
+
 // struct tm *gmtime(const time_t *timep);
 
 #if 0
@@ -192,6 +202,11 @@ int main(int argc, char *argv[]) {
             first_day_of_the_week = Weekday::Sa;
             panic();
         }
+    }
+
+    {
+        struct tm tm_test{};
+        tm_from_iso8601(&tm_test, "2021-01-01"_sv);
     }
 
     struct tm t{};
