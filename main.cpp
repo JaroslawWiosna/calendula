@@ -1,6 +1,6 @@
 #include "version.txt"
 
-#include "aids.hpp"
+#include "3rd_party/aids.hpp"
 
 #include <cstdio>
 #include <ctime>
