@@ -15,6 +15,6 @@ version.txt:
 	printf '"%s"' `git describe --tags --always --dirty` | grep -qsf - version.txt \
 	|| printf >version.txt 'const char version[]="%s";\n' `git describe --tags --always --dirty`
 
-$(APP): $(wildcard *.cpp) $(wildcard *.hpp) version.txt
+$(APP): $(wildcard *.cpp) $(wildcard *.hpp) 3rd_party/aids.hpp version.txt
 	$(CXX) $(CXXFLAGS) main.cpp -o $(APP) $(LIBS)
 

@@ -1,6 +1,6 @@
 #include "version.txt"
 
-#include "aids.hpp"
+#include "3rd_party/aids.hpp"
 
 #include <cstdio>
 #include <ctime>
@@ -167,38 +167,41 @@ void usage(FILE *stream)
 
 int main(int argc, char *argv[]) {
     Weekday first_day_of_the_week{Weekday::Mo};
-    for (int i{1}; i < argc; ++i) {
-        if (0 == strcmp("-h", argv[i]) || 0 == strcmp("--help", argv[i])) {
+    Args args{argc, argv};
+    args.shift(); // skip the program name
+    while (not args.empty()) {
+        auto arg = args.shift();
+        if (0 == strcmp("-h", arg) || 0 == strcmp("--help", arg)) {
             usage(stderr);
             exit(1);
         }
-        if (0 == strcmp("-V", argv[i]) || 0 == strcmp("--version", argv[i])) {
+        if (0 == strcmp("-V", arg) || 0 == strcmp("--version", arg)) {
             println(stdout, "calendula ", version);
             exit(1);
         }
-        if (0 == strcmp("-s", argv[i]) || 0 == strcmp("--sunday", argv[i])) {
+        if (0 == strcmp("-s", arg) || 0 == strcmp("--sunday", arg)) {
             first_day_of_the_week = Weekday::Su;
         }
-        if (0 == strcmp("-m", argv[i]) || 0 == strcmp("--monday", argv[i])) {
+        if (0 == strcmp("-m", arg) || 0 == strcmp("--monday", arg)) {
             first_day_of_the_week = Weekday::Mo;
         }
-        if (0 == strcmp("--tuesday", argv[i])) {
+        if (0 == strcmp("--tuesday", arg)) {
             first_day_of_the_week = Weekday::Tu;
             panic("TODO(#2): Set starting weekday from argv (other than Sunday or Monday");
         }
-        if (0 == strcmp("--wednesday", argv[i])) {
+        if (0 == strcmp("--wednesday", arg)) {
             first_day_of_the_week = Weekday::We;
             panic();
         }
-        if (0 == strcmp("--thursday", argv[i])) {
+        if (0 == strcmp("--thursday", arg)) {
             first_day_of_the_week = Weekday::Th;
             panic();
         }
-        if (0 == strcmp("--friday", argv[i])) {
+        if (0 == strcmp("--friday", arg)) {
             first_day_of_the_week = Weekday::Fr;
             panic();
         }
-        if (0 == strcmp("--saturday", argv[i])) {
+        if (0 == strcmp("--saturday", arg)) {
             first_day_of_the_week = Weekday::Sa;
             panic();
         }
