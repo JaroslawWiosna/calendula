@@ -16,6 +16,10 @@ jobs:
       - name: run
         run: |
           make run
+      - name: demo
+        run: |
+          make demo
+          cat log_*.txt
         env:
           CC: gcc
           CXX: g++
