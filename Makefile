@@ -18,3 +18,5 @@ version.txt:
 $(APP): $(wildcard *.cpp) $(wildcard *.hpp) 3rd_party/aids.hpp version.txt
 	$(CXX) $(CXXFLAGS) main.cpp -o $(APP) $(LIBS)
 
+demo: $(APP) ./tools/demo.sh
+	 ./tools/demo.sh &> log_`date +%Y%m%d_%H%M%S`.txt
